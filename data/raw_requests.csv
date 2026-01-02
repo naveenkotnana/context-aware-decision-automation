@@ -1,0 +1,6 @@
+request_text,customer_type,interaction_count,severity_score,urgency
+Payment failed during checkout,premium,10,8,High
+Unable to login to account,new,1,4,Medium
+Refund not processed,existing,5,6,High
+How to reset password,new,0,2,Low
+Order delivered late,existing,3,5,Medium
