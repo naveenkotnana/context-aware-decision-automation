@@ -1,72 +1,74 @@
 Context-Aware AI Decision Automation System
- Overview
+Overview
 
-This project is an end-to-end AI-powered decision automation system that analyzes customer requests and automatically determines:
+This project is an end-to-end AI-driven decision support system designed to automatically analyze customer requests and recommend the urgency level and next best action.
 
-How urgent the request is
+The system combines Natural Language Processing (NLP), Machine Learning, and rule-based decision logic to simulate how real-world enterprise support and operations teams triage and handle incoming requests.
 
-What action should be taken next
+The application is implemented as a Streamlit-based interactive interface, making it suitable for demos, client-facing explanations, and interviews without requiring backend API deployment.
 
-It combines Natural Language Processing (NLP), Machine Learning, and business rule-based decision logic to mimic how real enterprise systems handle customer support and operational workflows.
+Problem Statement
 
-The application runs as an interactive Streamlit app (no API required) and is designed for real-time decision support.
+In large-scale customer support and operations environments:
 
- Problem Statement
+Thousands of requests are received daily
 
-In real-world organizations (fintech, telecom, e-commerce, support centers):
+Manual triaging is time-consuming and inconsistent
 
-Thousands of customer requests arrive daily
-
-Manual triaging is slow and inconsistent
+High-priority issues may be delayed
 
 Pure rule-based systems lack flexibility
 
 Pure ML systems lack explainability
 
- Solution
+There is a need for a system that is both intelligent and controllable.
 
-This system combines:
+Solution Approach
 
-ML → to understand text and predict urgency
+This project addresses the problem by combining:
 
-Rules → to enforce business logic and control decisions
+NLP and Machine Learning to understand and classify customer requests
 
-Result: Fast, scalable, and explainable decision automation.
+Contextual signals such as customer type, severity, and interaction history
 
- System Architecture
+Rule-based decision logic to ensure explainable and business-aligned outcomes
+
+The result is a context-aware, scalable, and interpretable decision automation system.
+
+System Architecture
 User Input (Streamlit UI)
         ↓
-Text Preprocessing (TF-IDF, Cleaning)
+Text Preprocessing (Cleaning + TF-IDF)
         ↓
-ML Model (Logistic Regression)
+Machine Learning Model (Logistic Regression)
         ↓
 Urgency Prediction
         ↓
 Decision Agent (Business Rules)
         ↓
-Final Action
+Recommended Action
         ↓
-(Optional) SQLite Database Logging
+(Optional) Database Logging
 
-🔍 Key Features
+Key Features
 
 NLP-based customer request understanding
 
-Context-aware ML predictions
+Context-aware urgency prediction using machine learning
 
-Rule-based decision agent for explainability
+Rule-based decision agent for explainability and control
 
-Interactive UI using Streamlit
+Interactive Streamlit user interface
 
-Optional database logging for audit & governance
+Optional SQLite-based logging for audit and analysis
 
-Modular, scalable project structure
+Modular and extensible project structure
 
- Tech Stack
+Technology Stack
 
 Python
 
-Streamlit (UI)
+Streamlit
 
 Scikit-learn
 
@@ -74,164 +76,131 @@ Pandas, NumPy
 
 SQLite
 
-NLP (TF-IDF Vectorization)
+NLP using TF-IDF vectorization
 
-Git & GitHub
+Git and GitHub
 
- Project Structure
+Project Structure
 context-aware-decision-automation/
 │
-├── streamlit_app.py          # Main Streamlit application
+├── streamlit_app.py          # Main application entry point
 ├── data/
 │   └── raw_requests.csv      # Training dataset
 │
 ├── preprocessing/
-│   └── text_preprocessing.py # Text cleaning & TF-IDF
+│   ├── __init__.py
+│   └── text_preprocessing.py # Text cleaning and vectorization
 │
 ├── models/
-│   └── ml_model.py           # ML model (Logistic Regression)
+│   ├── __init__.py
+│   └── ml_model.py           # Machine learning model logic
 │
 ├── decision_agent/
+│   ├── __init__.py
 │   └── decision_agent.py     # Business decision rules
 │
 ├── database/
-│   └── db.py                 # SQLite database logic
+│   ├── __init__.py
+│   └── db.py                 # Database operations
 │
 ├── requirements.txt
 └── README.md
 
- File-by-File Explanation
-streamlit_app.py
+Input and Output
+Inputs
 
-Entry point of the application
+Customer request text
 
-Builds the UI
+Customer type (regular or premium)
 
-Collects user inputs
+Interaction count
 
-Runs ML prediction and decision logic
+Severity score (1–10)
 
-Displays urgency and action
+Outputs
 
-preprocessing/text_preprocessing.py
+Urgency level (HIGH, LOW, UNKNOWN)
 
-Cleans raw text (lowercase, remove symbols)
+Recommended action, such as:
 
-Converts text into numerical features using TF-IDF
+ESCALATE_TO_HUMAN
 
-Ensures safe usage during Streamlit reruns
+AUTO_RESOLVE
 
-models/ml_model.py
+ROUTE_TO_OPERATIONS
 
-Implements Logistic Regression model
+MANUAL_REVIEW
 
-Trains on historical request data
+Example Scenario
 
-Predicts urgency (HIGH, LOW, UNKNOWN)
+Input
 
-Designed to be Streamlit-safe
+Request: “My payment failed and no one is responding”
 
-decision_agent/decision_agent.py
-
-Converts ML output into business actions
-
-Applies rules like:
-
-High urgency + premium → escalate
-
-Low severity → auto-resolve
-
-Ensures explainability and control
-
-database/db.py
-
-Stores request, urgency, and action
-
-Used for audit, monitoring, and future retraining
-
-Optional for demo (system works without DB)
-
-data/raw_requests.csv
-
-Training dataset
-
-Contains:
-
-request text
-
-interaction count
-
-severity score
-
-urgency label
-
- How to Clone & Run the Project
-1️⃣ Clone the repository
-git clone https://github.com/naveenkotnana/context-aware-decision-automation.git
-cd context-aware-decision-automation
-
-2️⃣ Create and activate virtual environment (recommended)
-
-Use Python 3.10 or 3.11
-
-python3 -m venv venv
-source venv/bin/activate   # Linux / macOS
-
-
-(Windows)
-
-venv\Scripts\activate
-
-3️⃣ Install dependencies
-pip install -r requirements.txt
-
-4️⃣ Run the Streamlit application
-streamlit run streamlit_app.py
-
-5️⃣ Open in browser
-http://localhost:8501
-
- Example Input
-
-Customer Request
-
-My payment failed and no one is responding
-
-
-Customer Type: premium
+Customer Type: Premium
 
 Interaction Count: 3
 
 Severity Score: 8
 
- Example Output
+Output
+
 Urgency: HIGH
 Action: ESCALATE_TO_HUMAN
 
- Why Streamlit Instead of API?
+Getting Started
+1. Clone the Repository
+git clone https://github.com/naveenkotnana/context-aware-decision-automation.git
+cd context-aware-decision-automation
 
-Faster prototyping
+2. Create and Activate a Virtual Environment
 
-No backend deployment complexity
+Python 3.10 or 3.11 is recommended.
 
-Real-time interaction
+python3 -m venv venv
+source venv/bin/activate   # Linux / macOS
 
-Ideal for demos and interviews
 
-Can be extended to FastAPI later
+Windows:
 
- Future Enhancements
+venv\Scripts\activate
+
+3. Install Dependencies
+pip install -r requirements.txt
+
+4. Run the Application
+streamlit run streamlit_app.py
+
+5. Access the Application
+
+Open the following URL in your browser:
+
+http://localhost:8501
+
+Why Streamlit
+
+Streamlit was chosen to:
+
+Enable rapid prototyping and demonstrations
+
+Avoid backend deployment complexity
+
+Provide real-time interaction for users
+
+Support easy transition to an API-based architecture if required
+
+Future Enhancements
 
 Feedback loop for model retraining
 
 Confidence scores for predictions
 
-Analytics dashboard
+Analytics and monitoring dashboard
 
-REST API wrapper
+REST API wrapper for production deployment
 
-LLM-based decision agent
+Integration with large language models for advanced reasoning
 
- One-Line Summary (Interview Ready)
+Summary
 
-An AI system that understands customer issues and automatically determines urgency and actions using NLP, machine learning, and business rules.
+This project demonstrates how NLP, machine learning, and business rules can be combined to build a practical, explainable, and scalable decision automation system suitable for real-world enterprise use cases.
